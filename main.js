@@ -101,7 +101,6 @@ const createWindow = () => {
     }
     return { action: "deny" };
   });
-
   // 加载主界面
   win.loadFile("index.html");
 };
