@@ -16,7 +16,6 @@
     var stop = true;
     // 页面加载完成自动执行
     window.onload = () => {
-      console.log("------");
       // 获取摄像头视频
       this.getMedia();
     };
@@ -48,7 +47,7 @@
     // 获得视频流数据
     function getMedia() {
       var constraints = {
-        video: { width: 300, height: 300 },
+        video: { width: 160, height: 160 },
         audio: true,
       };
       //   H5新媒体接口 navigator.mediaDevices.getUserMedia()
@@ -63,15 +62,6 @@
         .catch(function (PermissionDeniedError) {
           console.log(PermissionDeniedError);
         });
-    }
-    // 拍照功能
-    function getImgFromVedio() {
-      let canvas = document.createElement("canvas");
-      let ctx = canvas.getContext("2d");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      console.log(canvas.toDataURL("image/png"));
     }
   </script>
 </html>

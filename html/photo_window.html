@@ -4,84 +4,57 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>拍照</title>
+    <title>ICamera</title>
   </head>
-  <body style="background: transparent; background-color: transparent">
-    <div id="left">
-      <video id="video" autoplay="autoplay"></video>
-      <button id="takePhoto">拍照</button>
-    </div>
-    <div id="right">
-      <img
-        id="showImage"
-        src="https://media.istockphoto.com/id/1202294840/zh/%E7%85%A7%E7%89%87/%E4%BA%94%E9%A1%8F%E5%85%AD%E8%89%B2%E7%9A%84%E7%86%B1%E6%B0%A3%E7%90%83%E5%9C%A8%E5%8D%A1%E5%B8%95%E5%A4%9A%E8%A5%BF%E4%BA%9E%E5%B1%B1%E8%B0%B7%E4%B8%AD%E9%A3%9B%E8%A1%8C.jpg?s=612x612&w=0&k=20&c=cYhQBzdxUbIWJvcB3UDibeWuO4bNkmMcoTlCe3DDieY="
-      />
-      <button id="savePhoto" disabled="true">保存</button>
-    </div>
+  <body>
+    <video id="video" autoplay="autoplay"></video>
   </body>
   <script>
-    // const { dialog } = require("electron");
-    // const { dialog } = require("@electron/remote");
-    const fs = require("fs");
     // 获得video摄像头区域
     var video = document.getElementById("video");
-    var takePhoto = document.getElementById("takePhoto");
-    var savePhoto = document.getElementById("savePhoto");
-    var showImage = document.getElementById("showImage");
     var videoStream = null;
-    var imageData = null;
-
+    var stop = true;
     // 页面加载完成自动执行
     window.onload = () => {
+      console.log("------");
       // 获取摄像头视频
       this.getMedia();
-      takePhoto.onclick = () => {
-        this.getImgFromVedio();
-        showImage.setAttribute("src", this.imageData);
-        savePhoto.removeAttribute("disabled");
-      };
-      savePhoto.onclick = () => {
-        dialogApi
-          .showSaveDialog({
-            title: "保存照片到本地",
-          })
-          .then((result) => {
-            // result是一个对象
-            console.log(result.filePath);
-
-            // const base64 = this.imageData.replace(
-            //   /^data:image\/\w+;base64,/,
-            //   ""
-            // );
-            // const path = `${result.filePath}${Date.now()}${index}.png`;
-            // fs.writeFile(path, base64, "base64", function (err) {
-            //   if (err) {
-            //     console.log(err);
-            //   } else {
-            //     console.log("写入成功！", path);
-            //   }
-            // });
-            // 获得路径之后写入内容
-            // fs.writeFileSync(result.filePath, this.imageData);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      };
     };
+    // 双击停止视频并且关闭摄像头
+    video.ondblclick = () => {
+      this.stopMedia();
+      window.opener.postMessage("close-vedio-window");
+    };
+    // 右键是暂停和开始摄像
+    video.oncontextmenu = () => {
+      if (stop) {
+        console.log("获取视频流");
+        this.getMedia();
+      } else {
+        console.log("假暂停获取视频流");
+        this.fakeStopMedia();
+      }
+    };
+    // 假暂停-后台继续还有视频流
+    function fakeStopMedia() {
+      video.pause();
+      this.stop = true;
+    }
+    // 结束获取视频流数据
+    function stopMedia() {
+      this.videoStream.getTracks()[0].stop();
+      this.videoStream.getTracks()[1].stop();
+    }
     // 获得视频流数据
     function getMedia() {
       var constraints = {
-        video: { width: 300, height: 300 },
+        video: { width: 200, height: 300 },
         audio: true,
       };
       //   H5新媒体接口 navigator.mediaDevices.getUserMedia()
       var promise = navigator.mediaDevices.getUserMedia(constraints);
       promise
         .then(function (MediaStream) {
-          // 对视频流进行处理
-          // 将处理后的视频流传给vedio
-          //   console.log(MediaStream);
           video.srcObject = MediaStream;
           video.play();
           this.videoStream = MediaStream;
@@ -98,52 +71,22 @@
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      //   console.log(canvas.toDataURL("image/png"));
-      this.imageData = canvas.toDataURL("image/png");
+      console.log(canvas.toDataURL("image/png"));
     }
   </script>
 </html>
 
 <style>
   #video {
-    height: 200px;
-    width: 200px;
+    /* 自适应大小 */
+    height: 100%;
+    width: 100%;
     display: block;
     /* 设置圆形 */
-    border-radius: 50%;
+    border-radius: 2%;
     /* 镜像反转 */
     transform: rotateY(180deg);
-  }
-  #left {
-    /* line-height: 30px; */
-    /* background-color: #eeeeee; */
-    height: 200px;
-    width: 200px;
-    float: left;
-    /* padding: 5px; */
-  }
-  #right {
-    width: 200px;
-    height: 200px;
-    float: left;
-    margin-left: 83px;
-    /* padding: 10px; */
-  }
-  #showImage {
-    height: 200px;
-    width: 200px;
-    display: block;
-    /* 设置圆形 */
-    border-radius: 50%;
-    /* 镜像反转 */
-    transform: rotateY(180deg);
-  }
-  #takePhoto {
-    margin-top: 10px;
-    margin-left: 78px;
-  }
-  #savePhoto {
-    margin-top: 10px;
-    margin-left: 78px;
+    /* 可拖拽 */
+    -webkit-app-region: drag;
   }
 </style>

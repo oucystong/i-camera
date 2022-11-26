@@ -24,12 +24,37 @@ const createWindow = () => {
   win.webContents.openDevTools();
   // 设置打开子窗口处理器-增强原生window.open中的feature参数
   win.webContents.setWindowOpenHandler((urlData) => {
-    if (urlData != null) {
+    let htmlName = urlData.url.substring(
+      urlData.url.lastIndexOf("/") + 1,
+      urlData.url.lastIndexOf(".")
+    );
+    if (htmlName === "vedio_window") {
+      // 直播摄像头窗口配置
       return {
         action: "allow",
         overrideBrowserWindowOptions: {
           width: 160,
           height: 160,
+          roundedCorners: false,
+          frame: false,
+          movable: true,
+          resizable: false,
+          transparent: true,
+          alwaysOnTop: true,
+          show: true,
+          webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: true,
+          },
+        },
+      };
+    } else if (htmlName === "photo_window") {
+      // 拍照窗口配置
+      return {
+        action: "allow",
+        overrideBrowserWindowOptions: {
+          width: 200,
+          height: 300,
           roundedCorners: false,
           frame: false,
           movable: true,
