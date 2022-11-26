@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ICamera</title>
   </head>
-  <body style="background: transparent; background-color: transparent">
+  <body>
     <video id="video" autoplay="autoplay"></video>
   </body>
   <script>
-    const { ipcRenderer } = require("electron");
     // 获得video摄像头区域
     var video = document.getElementById("video");
     var videoStream = null;
@@ -24,8 +23,7 @@
     // 双击停止视频并且关闭摄像头
     video.ondblclick = () => {
       this.stopMedia();
-      // 渲染进程间也可以通过ipc进行通信
-      ipcRenderer.send("window-close");
+      window.opener.postMessage("close-vedio-window");
     };
     // 右键是暂停和开始摄像
     video.oncontextmenu = () => {
