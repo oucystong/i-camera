@@ -4,6 +4,7 @@ const {
   ipcMain,
   dialog,
   Notification,
+  shell,
 } = require("electron");
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const path = require("path");
@@ -19,8 +20,11 @@ if (isDevelopment) {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 280,
+    width: 345,
     height: 60,
+    resizable: false,
+    show: true,
+    alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
@@ -177,4 +181,8 @@ ipcMain.handle("saveMovie", (event, buffer) => {
       }
     });
   }
+});
+
+ipcMain.handle("goBilibili", (event) => {
+  shell.openExternal("https://space.bilibili.com/52459877");
 });

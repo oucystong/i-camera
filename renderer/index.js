@@ -2,7 +2,7 @@
 var openVedioBtn = document.getElementById("openVedioBtn");
 var startRecordBtn = document.getElementById("startRecordBtn");
 var takePhotoBtn = document.getElementById("takePhotoBtn");
-
+var goBilibili = document.getElementById("goBilibili");
 // 绑定点击事件
 window.onload = () => {
   // 打开直播摄像头
@@ -61,5 +61,9 @@ window.onload = () => {
         takePhotoBtn.removeAttribute("disabled");
       }
     });
+  };
+  // 去小佟的B站
+  goBilibili.onclick = () => {
+    window.goBiliniliAPI.goBilibili();
   };
 };

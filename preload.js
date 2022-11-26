@@ -15,3 +15,8 @@ contextBridge.exposeInMainWorld("dialogAPI", {
     reader.readAsArrayBuffer(blob);
   },
 });
+contextBridge.exposeInMainWorld("goBiliniliAPI", {
+  goBilibili: () => {
+    ipcRenderer.invoke("goBilibili");
+  },
+});
