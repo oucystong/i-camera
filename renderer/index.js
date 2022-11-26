@@ -29,17 +29,13 @@ window.onload = () => {
     openVedioBtn.setAttribute("disabled", true);
     startRecordBtn.setAttribute("disabled", true);
     takePhotoBtn.setAttribute("disabled", true);
-    let photoWindow = window.open(
-      "html/record_window.html",
-      "_blank",
-      "width=300,height=300"
-    );
+    let recordWindow = window.open("html/record_window.html", "_blank");
     // 消息监听器-监听来自子窗口的消息
     window.addEventListener("message", (msg) => {
       if (JSON.stringify(msg.data) != null) {
-        if (photoWindow != null) {
-          photoWindow.close();
-          photoWindow = null;
+        if (recordWindow != null) {
+          recordWindow.close();
+          recordWindow = null;
         }
         openVedioBtn.removeAttribute("disabled");
         startRecordBtn.removeAttribute("disabled");

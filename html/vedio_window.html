@@ -27,13 +27,16 @@
     // 右键是暂停和开始摄像
     video.oncontextmenu = () => {
       if (stop) {
-        console.log("获取视频流");
-        this.getMedia();
+        this.reStartMedia();
       } else {
-        console.log("假暂停获取视频流");
         this.fakeStopMedia();
       }
     };
+    // 重新播放
+    function reStartMedia() {
+      video.play();
+      this.stop = false;
+    }
     // 假暂停-后台继续还有视频流
     function fakeStopMedia() {
       video.pause();

@@ -27,9 +27,7 @@
     // 右键拍照保存
     video.oncontextmenu = () => {
       this.getImgFromVedio();
-      // window.dialogAPI.savePicture(this.imageData);
-      // window.myAPI.doAThing();
-      console.log(this.imageData);
+      // console.log(this.imageData);
       window.dialogAPI.savePicture(this.imageData);
     };
     // 结束获取视频流数据

@@ -19,7 +19,7 @@ if (isDevelopment) {
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 330,
+    width: 280,
     height: 60,
     webPreferences: {
       nodeIntegration: true,
@@ -28,7 +28,7 @@ const createWindow = () => {
     },
   });
   // 打开调试模式
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   // 设置打开子窗口处理器-增强原生window.open中的feature参数
   win.webContents.setWindowOpenHandler((urlData) => {
     let htmlName = urlData.url.substring(
@@ -65,7 +65,7 @@ const createWindow = () => {
           roundedCorners: false,
           frame: false,
           movable: true,
-          resizable: true,
+          resizable: false,
           transparent: true,
           alwaysOnTop: true,
           show: true,
@@ -76,7 +76,30 @@ const createWindow = () => {
           },
         },
       };
+    } else if (htmlName === "record_window") {
+      // 录像窗口配置
+      return {
+        action: "allow",
+        overrideBrowserWindowOptions: {
+          width: 160,
+          height: 160,
+          roundedCorners: false,
+          frame: false,
+          movable: true,
+          resizable: false,
+          transparent: true,
+          // vibrancy: "selection",
+          alwaysOnTop: true,
+          show: true,
+          webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: true,
+            preload: path.join(__dirname, "preload.js"),
+          },
+        },
+      };
     }
+
     return { action: "deny" };
   });
 
@@ -88,7 +111,6 @@ const createWindow = () => {
       buttonLabel: "保存我的照片",
       filters: [{ name: "Custom File Type", extensions: ["png", "jpg"] }],
     });
-
     if (!dia) {
       //点击取消时
       new Notification({
@@ -98,6 +120,36 @@ const createWindow = () => {
     } else {
       // 确认保存
       fs.writeFile(dia, dataBuffer, function (err) {
+        if (err) {
+          new Notification({
+            title: "ICamera",
+            body: "保存失败",
+          }).show();
+        } else {
+          new Notification({
+            title: "ICamera",
+            body: "保存成功",
+          }).show();
+        }
+      });
+    }
+  });
+
+  ipcMain.handle("saveMovie", (event, buffer) => {
+    // 保存视频文件
+    let dia = dialog.showSaveDialogSync({
+      buttonLabel: "保存我的录像",
+      filters: [{ name: "Custom File Type", extensions: ["mp4"] }],
+    });
+    if (!dia) {
+      //点击取消时
+      new Notification({
+        title: "ICamera",
+        body: "取消保存",
+      }).show();
+    } else {
+      // 确认保存
+      fs.writeFile(dia, buffer, function (err) {
         if (err) {
           new Notification({
             title: "ICamera",
