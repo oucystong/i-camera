@@ -24,7 +24,7 @@ const createWindow = () => {
     height: 60,
     resizable: false,
     show: true,
-    alwaysOnTop: true,
+    // alwaysOnTop: true,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
