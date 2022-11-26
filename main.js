@@ -82,8 +82,6 @@ const createWindow = () => {
 
   // 执行保存文件操作
   ipcMain.handle("savePicture", (event, imgData) => {
-    // console.log(imgData);
-
     let base64 = imgData.replace(/^data:image\/\w+;base64,/, "");
     let dataBuffer = Buffer.from(base64, "base64");
     let dia = dialog.showSaveDialogSync({
