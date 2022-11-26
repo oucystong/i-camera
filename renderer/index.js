@@ -8,7 +8,6 @@ var takePhotoBtn = document.getElementById("takePhotoBtn");
 window.onload = () => {
   // 打开直播摄像头
   openVedioBtn.onclick = () => {
-    // 禁用打开按钮
     openVedioBtn.setAttribute("disabled", true);
     startRecordBtn.setAttribute("disabled", true);
     takePhotoBtn.setAttribute("disabled", true);
@@ -32,7 +31,6 @@ window.onload = () => {
   stopRecordBtn.onclick = () => {};
   // 拍照
   takePhotoBtn.onclick = () => {
-    // 禁用打开按钮
     openVedioBtn.setAttribute("disabled", true);
     startRecordBtn.setAttribute("disabled", true);
     takePhotoBtn.setAttribute("disabled", true);
