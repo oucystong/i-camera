@@ -1,6 +1,13 @@
-const { app, BrowserWindow } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  dialog,
+  Notification,
+} = require("electron");
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const path = require("path");
+const fs = require("fs");
 
 // 实现热部署
 const isDevelopment = !app.isPackaged;
@@ -58,19 +65,56 @@ const createWindow = () => {
           roundedCorners: false,
           frame: false,
           movable: true,
-          resizable: false,
+          resizable: true,
           transparent: true,
           alwaysOnTop: true,
           show: true,
           webPreferences: {
             nodeIntegration: true,
             contextIsolation: true,
+            preload: path.join(__dirname, "preload.js"),
           },
         },
       };
     }
     return { action: "deny" };
   });
+
+  // 执行保存文件操作
+  ipcMain.handle("savePicture", (event, imgData) => {
+    // console.log(imgData);
+
+    let base64 = imgData.replace(/^data:image\/\w+;base64,/, "");
+    let dataBuffer = Buffer.from(base64, "base64");
+    let dia = dialog.showSaveDialogSync({
+      buttonLabel: "保存我的照片",
+      filters: [{ name: "Custom File Type", extensions: ["png", "jpg"] }],
+    });
+
+    if (!dia) {
+      //点击取消时
+      new Notification({
+        title: "ICamera",
+        body: "取消保存",
+      }).show();
+    } else {
+      // 确认保存
+      fs.writeFile(dia, dataBuffer, function (err) {
+        if (err) {
+          new Notification({
+            title: "ICamera",
+            body: "保存失败",
+          }).show();
+        } else {
+          new Notification({
+            title: "ICamera",
+            body: "保存成功",
+          }).show();
+        }
+      });
+    }
+  });
+
   // 加载主界面
   win.loadFile("index.html");
 };

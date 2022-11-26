@@ -13,10 +13,9 @@
     // 获得video摄像头区域
     var video = document.getElementById("video");
     var videoStream = null;
-    var stop = true;
+    var imageData = null;
     // 页面加载完成自动执行
     window.onload = () => {
-      console.log("------");
       // 获取摄像头视频
       this.getMedia();
     };
@@ -25,21 +24,14 @@
       this.stopMedia();
       window.opener.postMessage("close-vedio-window");
     };
-    // 右键是暂停和开始摄像
+    // 右键拍照保存
     video.oncontextmenu = () => {
-      if (stop) {
-        console.log("获取视频流");
-        this.getMedia();
-      } else {
-        console.log("假暂停获取视频流");
-        this.fakeStopMedia();
-      }
+      this.getImgFromVedio();
+      // window.dialogAPI.savePicture(this.imageData);
+      // window.myAPI.doAThing();
+      console.log(this.imageData);
+      window.dialogAPI.savePicture(this.imageData);
     };
-    // 假暂停-后台继续还有视频流
-    function fakeStopMedia() {
-      video.pause();
-      this.stop = true;
-    }
     // 结束获取视频流数据
     function stopMedia() {
       this.videoStream.getTracks()[0].stop();
@@ -71,7 +63,9 @@
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      console.log(canvas.toDataURL("image/png"));
+      // 将图片数据保存
+      this.imageData = canvas.toDataURL("image/png");
+      // console.log(canvas.toDataURL("image/png"));
     }
   </script>
 </html>
