@@ -99,70 +99,7 @@ const createWindow = () => {
         },
       };
     }
-
     return { action: "deny" };
-  });
-
-  // 执行保存文件操作
-  ipcMain.handle("savePicture", (event, imgData) => {
-    let base64 = imgData.replace(/^data:image\/\w+;base64,/, "");
-    let dataBuffer = Buffer.from(base64, "base64");
-    let dia = dialog.showSaveDialogSync({
-      buttonLabel: "保存我的照片",
-      filters: [{ name: "Custom File Type", extensions: ["png", "jpg"] }],
-    });
-    if (!dia) {
-      //点击取消时
-      new Notification({
-        title: "ICamera",
-        body: "取消保存",
-      }).show();
-    } else {
-      // 确认保存
-      fs.writeFile(dia, dataBuffer, function (err) {
-        if (err) {
-          new Notification({
-            title: "ICamera",
-            body: "保存失败",
-          }).show();
-        } else {
-          new Notification({
-            title: "ICamera",
-            body: "保存成功",
-          }).show();
-        }
-      });
-    }
-  });
-
-  ipcMain.handle("saveMovie", (event, buffer) => {
-    // 保存视频文件
-    let dia = dialog.showSaveDialogSync({
-      buttonLabel: "保存我的录像",
-      filters: [{ name: "Custom File Type", extensions: ["mp4"] }],
-    });
-    if (!dia) {
-      //点击取消时
-      new Notification({
-        title: "ICamera",
-        body: "取消保存",
-      }).show();
-    } else {
-      // 确认保存
-      fs.writeFile(dia, buffer, function (err) {
-        if (err) {
-          new Notification({
-            title: "ICamera",
-            body: "保存失败",
-          }).show();
-        } else {
-          new Notification({
-            title: "ICamera",
-            body: "保存成功",
-          }).show();
-        }
-      });
-    }
   });
 
   // 加载主界面
@@ -178,4 +115,67 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
+});
+
+// 不要重复监听处理
+// 执行保存文件操作
+ipcMain.handle("savePicture", (event, imgData) => {
+  let base64 = imgData.replace(/^data:image\/\w+;base64,/, "");
+  let dataBuffer = Buffer.from(base64, "base64");
+  let dia = dialog.showSaveDialogSync({
+    buttonLabel: "保存我的照片",
+    filters: [{ name: "Custom File Type", extensions: ["png", "jpg"] }],
+  });
+  if (!dia) {
+    //点击取消时
+    new Notification({
+      title: "ICamera",
+      body: "取消保存",
+    }).show();
+  } else {
+    // 确认保存
+    fs.writeFile(dia, dataBuffer, function (err) {
+      if (err) {
+        new Notification({
+          title: "ICamera",
+          body: "保存失败",
+        }).show();
+      } else {
+        new Notification({
+          title: "ICamera",
+          body: "保存成功",
+        }).show();
+      }
+    });
+  }
+});
+
+ipcMain.handle("saveMovie", (event, buffer) => {
+  // 保存视频文件
+  let dia = dialog.showSaveDialogSync({
+    buttonLabel: "保存我的录像",
+    filters: [{ name: "Custom File Type", extensions: ["mp4"] }],
+  });
+  if (!dia) {
+    //点击取消时
+    new Notification({
+      title: "ICamera",
+      body: "取消保存",
+    }).show();
+  } else {
+    // 确认保存
+    fs.writeFile(dia, buffer, function (err) {
+      if (err) {
+        new Notification({
+          title: "ICamera",
+          body: "保存失败",
+        }).show();
+      } else {
+        new Notification({
+          title: "ICamera",
+          body: "保存成功",
+        }).show();
+      }
+    });
+  }
 });
