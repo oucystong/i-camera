@@ -1,6 +1,3 @@
-// const { BrowserWindow, ipcMain } = require("@electron/remote");
-// require("@electron/remote/main").initialize();
-
 // 获取按钮元素
 var openVedioBtn = document.getElementById("openVedioBtn");
 var startRecordBtn = document.getElementById("startRecordBtn");
@@ -52,8 +49,6 @@ window.onload = () => {
     });
     // 打开调试模式
     vedioWindow.webContents.openDevTools();
-    // 加载remote模块;
-    // require("@electron/remote/main").enable(win.webContents);
     // 窗口穿透
     // vedioWindow.setIgnoreMouseEvents(true);
     vedioWindow.loadFile("html/photo_window.html");

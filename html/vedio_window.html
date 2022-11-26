@@ -37,8 +37,6 @@
     };
     // 假暂停-后台继续还有视频流
     function fakeStopMedia() {
-      //   video.className = "videobg";
-      //   document.body.style.backgroundColor = "#FFCC80";
       video.pause();
       this.stop = true;
     }
@@ -57,9 +55,6 @@
       var promise = navigator.mediaDevices.getUserMedia(constraints);
       promise
         .then(function (MediaStream) {
-          // 对视频流进行处理
-          // 将处理后的视频流传给vedio
-          //   console.log(MediaStream);
           video.srcObject = MediaStream;
           video.play();
           this.videoStream = MediaStream;

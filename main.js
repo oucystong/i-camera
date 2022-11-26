@@ -1,5 +1,4 @@
 const { app, BrowserWindow } = require("electron");
-// require("@electron/remote/main").initialize();
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const path = require("path");
 
@@ -15,10 +14,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 330,
     height: 60,
-    // frame: false,
-    // transparent: true,
     webPreferences: {
-      // 开启node环境
       nodeIntegration: true,
       contextIsolation: true,
       preload: path.join(__dirname, "preload.js"),
@@ -26,7 +22,6 @@ const createWindow = () => {
   });
   // 打开调试模式
   win.webContents.openDevTools();
-
   // 设置打开子窗口处理器-增强原生window.open中的feature参数
   win.webContents.setWindowOpenHandler((urlData) => {
     if (urlData != null) {
@@ -51,9 +46,6 @@ const createWindow = () => {
     }
     return { action: "deny" };
   });
-
-  // 加载remote模块
-  // require("@electron/remote/main").enable(win.webContents);
   // 加载主界面
   win.loadFile("index.html");
 };
