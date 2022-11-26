@@ -10,13 +10,13 @@ process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 const path = require("path");
 const fs = require("fs");
 
-// 实现热部署
-const isDevelopment = !app.isPackaged;
-if (isDevelopment) {
-  try {
-    require("electron-reloader")(module);
-  } catch (err) {}
-}
+// // 实现热部署-开发专用-npm install electron-reloader --save-dev
+// const isDevelopment = !app.isPackaged;
+// if (isDevelopment) {
+//   try {
+//     require("electron-reloader")(module);
+//   } catch (err) {}
+// }
 
 const createWindow = () => {
   const win = new BrowserWindow({
