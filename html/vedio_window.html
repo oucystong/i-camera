@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICamera</title>
+  </head>
+  <body style="background: transparent; background-color: transparent">
+    <video id="video" autoplay="autoplay"></video>
+  </body>
+  <script>
+    const { ipcRenderer } = require("electron");
+    // 获得video摄像头区域
+    var video = document.getElementById("video");
+    var videoStream = null;
+    var stop = true;
+    // 页面加载完成自动执行
+    window.onload = () => {
+      console.log("------");
+      // 获取摄像头视频
+      this.getMedia();
+    };
+    // 双击停止视频并且关闭摄像头
+    video.ondblclick = () => {
+      this.stopMedia();
+      // 渲染进程间也可以通过ipc进行通信
+      ipcRenderer.send("window-close");
+    };
+    // 右键是暂停和开始摄像
+    video.oncontextmenu = () => {
+      if (stop) {
+        console.log("获取视频流");
+        this.getMedia();
+      } else {
+        console.log("假暂停获取视频流");
+        this.fakeStopMedia();
+      }
+    };
+    // 假暂停-后台继续还有视频流
+    function fakeStopMedia() {
+      //   video.className = "videobg";
+      //   document.body.style.backgroundColor = "#FFCC80";
+      video.pause();
+      this.stop = true;
+    }
+    // 结束获取视频流数据
+    function stopMedia() {
+      this.videoStream.getTracks()[0].stop();
+      this.videoStream.getTracks()[1].stop();
+    }
+    // 获得视频流数据
+    function getMedia() {
+      var constraints = {
+        video: { width: 300, height: 300 },
+        audio: true,
+      };
+      //   H5新媒体接口 navigator.mediaDevices.getUserMedia()
+      var promise = navigator.mediaDevices.getUserMedia(constraints);
+      promise
+        .then(function (MediaStream) {
+          // 对视频流进行处理
+          // 将处理后的视频流传给vedio
+          //   console.log(MediaStream);
+          video.srcObject = MediaStream;
+          video.play();
+          this.videoStream = MediaStream;
+          this.stop = false;
+        })
+        .catch(function (PermissionDeniedError) {
+          console.log(PermissionDeniedError);
+        });
+    }
+    // 拍照功能
+    function getImgFromVedio() {
+      let canvas = document.createElement("canvas");
+      let ctx = canvas.getContext("2d");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      console.log(canvas.toDataURL("image/png"));
+    }
+  </script>
+</html>
+
+<style>
+  #video {
+    /* 自适应大小 */
+    height: 100%;
+    width: 100%;
+    display: block;
+    /* 设置圆形 */
+    border-radius: 50%;
+    /* 镜像反转 */
+    transform: rotateY(180deg);
+    /* 可拖拽 */
+    -webkit-app-region: drag;
+  }
+</style>

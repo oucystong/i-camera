@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ICamera</title>
+  </head>
+  <body>
+    <div id="container">
+      <button id="openVedioBtn">打开直播摄像头</button>
+      <button id="startRecordBtn">开始录制</button>
+      <button id="stopRecordBtn" disabled="true">结束录制</button>
+      <button id="takePhotoBtn">拍照</button>
+    </div>
+  </body>
+  <script src="./renderer/index.js"></script>
+</html>
+<style>
+  #container {
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+</style>
