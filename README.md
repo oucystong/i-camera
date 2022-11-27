@@ -58,7 +58,7 @@ out
 >* 需要授予系统的摄像头权限
 >* 需要本地机器有`Node.js`、`npm`、`Git`环境
 
-#### 直接安装
+#### 直接安装【推荐】
 
 * `Mac`用户
   * 下载链接：https://gitee.com/xt-gitee/icamera/releases/tag/v1.0.0
