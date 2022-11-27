@@ -1,6 +1,6 @@
 # ICamera
 
-![camera](./assets/camera.png)
+<img src="./assets/camera.png" alt="camera" style="zoom: 25%;" />
 
 #### 介绍
 电脑摄像头小工具，主要解决以下痛点：
