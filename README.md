@@ -32,7 +32,7 @@
 
 ### 编译安装
 
-项目基于`Electron`构建，可以下载源码独立编译，编译过程如下：
+项目基于`Electron`构建，可以下载源码独立编译，以`Mac`为例，其编译过程如下：
 
 ```shell
 # 克隆源码
@@ -45,7 +45,7 @@ npm install
 npm run dev
 # 编译打包项目
 npm run make
-# 编译后的安装包在项目的out目录下
+# 编译后的应用在项目的out目录下
 out
 ├── ICamera-darwin-x64
 │   ├── ICamera.app
@@ -56,9 +56,10 @@ out
     └── zip
 ```
 
+将应用直接拖拽到应用程序即可。
 
-
-
+>* 需要授予系统的摄像头权限
+>* 需要本地机器有`Node.js`、`npm`、`git`环境
 
 ### 直接安装
 
