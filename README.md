@@ -23,14 +23,11 @@
 * 个人**证件照拍摄**
 
 ### 软件架构
-* `Electron`
-* `Html`
-* `Css`
-* `JavaScript`
+* `Electron`、`Html`、`Css`、`JavaScript`
 
 ### 安装教程
 
-### 编译安装
+#### 编译安装
 
 项目基于`Electron`构建，可以下载源码独立编译，以`Mac`为例，其编译过程如下：
 
