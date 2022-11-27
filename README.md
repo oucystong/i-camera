@@ -9,9 +9,9 @@
 
 #### 软件架构
 * `Electron`
-* Html
-* Css
-* JavaScript
+* `Html`
+* `Css`
+* `JavaScript`
 
 
 #### 安装教程
