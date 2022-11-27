@@ -1,5 +1,7 @@
 # ICamera
 
+![camera](./assets/camera.png)
+
 #### 介绍
 电脑摄像头小工具，主要解决以下痛点：
 
