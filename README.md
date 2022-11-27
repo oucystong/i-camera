@@ -28,8 +28,39 @@
 * `Css`
 * `JavaScript`
 
-
 ### 安装教程
+
+### 编译安装
+
+项目基于`Electron`构建，可以下载源码独立编译，编译过程如下：
+
+```shell
+# 克隆源码
+git clone https://gitee.com/xt-gitee/icamera.git
+# 切换目录
+cd icamera
+# 安装依赖
+npm install
+# 直接运行项目
+npm run dev
+# 编译打包项目
+npm run make
+# 编译后的安装包在项目的out目录下
+out
+├── ICamera-darwin-x64
+│   ├── ICamera.app
+│   ├── LICENSE
+│   ├── LICENSES.chromium.html
+│   └── version
+└── make
+    └── zip
+```
+
+
+
+
+
+### 直接安装
 
 1.  xxxx
 2.  xxxx
