@@ -1,6 +1,8 @@
 # ICamera
 
-<img src="./assets/camera.png" alt="camera" style="zoom: 25%;" />
+<div align=center>
+  <img src="./assets/camera.png" width="100" height="100" alt="笔记图标" style="zoom: 100%;" />
+</div>
 
 #### 介绍
 电脑摄像头小工具，主要解决以下痛点：
