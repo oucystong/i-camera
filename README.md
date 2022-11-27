@@ -61,29 +61,31 @@ out
 #### 直接安装
 
 * `Mac`用户
-
-
+  * 下载链接：https://gitee.com/xt-gitee/icamera/releases/tag/v1.0.0
+  * 解压软件
+  * 拖拽软件到应用程序
+  * 点击软件
+  * 进入系统偏好设置
+  * 安全性与隐私
+  * 仍然打开
 
 * `Windows`用户
-
-
+  * 暂未编译
 
 * `Linux`用户
+  * 暂未编译
 
-#### 使用说明
+### 使用说明
 
 
 
-#### 参与贡献
+### 参与贡献
 
 
 
 
 ### 特性更新
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+- [ ] 自动更新机制
+- [ ] 更换视频背景
+- [ ] 视频背景虚化
