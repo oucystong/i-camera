@@ -60,15 +60,15 @@ out
 
 #### 直接安装
 
-* Mac用户
+* `Mac`用户
 
 
 
-* Windows用户
+* `Windows`用户
 
 
 
-* Linux用户
+* `Linux`用户
 
 #### 使用说明
 
