@@ -56,29 +56,30 @@ out
 将应用直接拖拽到应用程序即可。
 
 >* 需要授予系统的摄像头权限
->* 需要本地机器有`Node.js`、`npm`、`git`环境
+>* 需要本地机器有`Node.js`、`npm`、`Git`环境
 
-### 直接安装
+#### 直接安装
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+* Mac用户
+
+
+
+* Windows用户
+
+
+
+* Linux用户
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
 
 
-#### 特技
+
+### 特性更新
 
 1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
 2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
