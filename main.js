@@ -49,7 +49,7 @@ const createWindow = () => {
           roundedCorners: false,
           frame: false,
           movable: true,
-          resizable: true,
+          resizable: false,
           transparent: true,
           alwaysOnTop: true,
           show: true,
