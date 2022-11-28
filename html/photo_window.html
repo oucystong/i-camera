@@ -21,6 +21,7 @@
     };
     // 双击停止视频并且关闭摄像头
     video.ondblclick = () => {
+      window.dialogAPI.quitPhoto("退出拍照");
       this.stopMedia();
       window.opener.postMessage("close-vedio-window");
     };

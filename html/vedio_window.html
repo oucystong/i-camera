@@ -21,14 +21,18 @@
     };
     // 双击停止视频并且关闭摄像头
     video.ondblclick = () => {
+      // 发送关闭摄像头通知-让主线程发送系统通知
+      window.dialogAPI.quitVedio("退出直播");
       this.stopMedia();
       window.opener.postMessage("close-vedio-window");
     };
     // 右键是暂停和开始摄像
     video.oncontextmenu = () => {
       if (stop) {
+        window.dialogAPI.resumeVedio("继续直播");
         this.reStartMedia();
       } else {
+        window.dialogAPI.pauseVedio("暂停直播");
         this.fakeStopMedia();
       }
     };

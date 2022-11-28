@@ -49,13 +49,14 @@ const createWindow = () => {
           roundedCorners: false,
           frame: false,
           movable: true,
-          resizable: false,
+          resizable: true,
           transparent: true,
           alwaysOnTop: true,
           show: true,
           webPreferences: {
             nodeIntegration: true,
             contextIsolation: true,
+            preload: path.join(__dirname, "preload.js"),
           },
         },
       };
@@ -186,3 +187,38 @@ ipcMain.handle("saveMovie", (event, buffer) => {
 ipcMain.handle("goBilibili", (event) => {
   shell.openExternal("https://space.bilibili.com/52459877");
 });
+
+ipcMain.handle("quitVedio", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("pauseVedio", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("resumeVedio", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("quitRecord", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("pauseRecord", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("resumeRecord", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+ipcMain.handle("quitPhoto", (event, msg) => {
+  sendSystemNotification(msg);
+});
+
+sendSystemNotification = (msg) => {
+  new Notification({
+    title: "ICamera",
+    body: msg,
+  }).show();
+};

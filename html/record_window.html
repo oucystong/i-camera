@@ -23,6 +23,7 @@
     };
     // 双击停止录制并且保存文件、关闭摄像头
     video.ondblclick = () => {
+      window.dialogAPI.quitRecord("停止录制并保存录像");
       this.stopRecord(); // 停止录制
       setTimeout(() => {
         window.opener.postMessage("close-vedio-window"); // 关闭窗口
@@ -31,9 +32,11 @@
     // 右键是暂停或者继续录制
     video.oncontextmenu = () => {
       if (stop) {
+        window.dialogAPI.resumeRecord("继续录制");
         this.reStartMedia();
         this.resumeRecord(); //继续录制
       } else {
+        window.dialogAPI.pauseRecord("暂停录制");
         this.fakeStopMedia(); // 暂停录制
         this.pauseRecord(); // 暂停录制
       }

@@ -1,6 +1,6 @@
 module.exports = {
   packagerConfig: {
-    appVersion: "1.0.0", //版本号
+    appVersion: "1.1.0", //版本号
     name: "ICamera", // 应用名称
     productName: "ICamera", // 产品名称
     appCopyright: "xiaotong(buaatys@163.com)", // 作者信息

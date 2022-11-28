@@ -14,6 +14,36 @@ contextBridge.exposeInMainWorld("dialogAPI", {
     };
     reader.readAsArrayBuffer(blob);
   },
+  // 退出摄像头通知发送-主线程去做
+  quitVedio: (msg) => {
+    // console.log(msg);
+    ipcRenderer.invoke("quitVedio", msg);
+  },
+  // 暂停摄像头通知发送-主线程去做
+  pauseVedio: (msg) => {
+    ipcRenderer.invoke("pauseVedio", msg);
+  },
+  // 继续摄像头通知发送-主线程去做
+  resumeVedio: (msg) => {
+    ipcRenderer.invoke("resumeVedio", msg);
+  },
+  // 退出录像通知发送-主线程去做
+  quitRecord: (msg) => {
+    // console.log(msg);
+    ipcRenderer.invoke("quitRecord", msg);
+  },
+  // 暂停摄像头通知发送-主线程去做
+  pauseRecord: (msg) => {
+    ipcRenderer.invoke("pauseRecord", msg);
+  },
+  // 继续录像通知发送-主线程去做
+  resumeRecord: (msg) => {
+    ipcRenderer.invoke("resumeRecord", msg);
+  },
+  // 退出拍照通知发送-主线程去做
+  quitPhoto: (msg) => {
+    ipcRenderer.invoke("quitPhoto", msg);
+  },
 });
 contextBridge.exposeInMainWorld("goBiliniliAPI", {
   goBilibili: () => {
